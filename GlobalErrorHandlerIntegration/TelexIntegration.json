@@ -1,0 +1,64 @@
+{
+  "data": {
+    "date": {
+      "created_at": "2025-02-18",
+      "updated_at": "2025-02-18"
+    },
+    "descriptions": {
+      "app_description": "Global Error Handler for ASP.NET Core. This integration captures unhandled exceptions in your application, formats detailed error information, and immediately forwards it to your Telex channel for real-time monitoring.",
+      "app_logo": "https://example.com/logo.png",
+      "app_name": "Global Error Handler",
+      "app_url": "https://example.com/global-error-handler",
+      "background_color": "#FF5733"
+    },
+    "integration_category": "Monitoring & Logging",
+    "integration_type": "modifier",
+    "is_active": true,
+    "output": [
+      {
+        "label": "Telex Channel",
+        "value": true
+      }
+    ],
+    "key_features": [
+      "Captures unhandled exceptions using ASP.NET Core middleware.",
+      "Formats errors with detailed information (exception type, message, stack trace, etc.).",
+      "Sends error logs immediately to a Telex channel via target_url.",
+      "Lightweight design ensures a response within 1 second."
+    ],
+    "permissions": {
+      "monitoring_user": {
+        "always_online": true,
+        "display_name": "Global Error Monitor"
+      }
+    },
+    "settings": [
+      {
+        "label": "notifyOnError",
+        "type": "checkbox",
+        "description": "Enable additional notifications on error occurrence.",
+        "default": true
+      },
+      {
+        "label": "Max-Error Message-Length",
+        "type": "number",
+        "description": "Maximum length for the stack trace error message sent to Telex.",
+        "default": 210,
+        "required": true
+      },
+      {
+        "label": "Include StackTrace",
+        "type": "checkbox",
+        "description": "Include stack trace details in the error report.",
+        "default": true
+      },
+      {
+        "label": "Include InnerException",
+        "type": "checkbox",
+        "description": "Include inner exception message if available.",
+        "default": true
+      }
+    ],
+    "target_url": "https://yourdomain.com/api/target_url/format-message"
+  }
+}
