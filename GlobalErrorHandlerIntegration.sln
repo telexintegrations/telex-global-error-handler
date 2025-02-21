@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalErrorHandlerIntegration.Tests", "GlobalErrorHandlerIntegration.Tests\GlobalErrorHandlerIntegration.Tests.csproj", "{19C42176-6F03-4886-AA7E-111E49FDAE19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{B03ACFA8-336A-4F88-BB0D-54A3CCA5D340}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B03ACFA8-336A-4F88-BB0D-54A3CCA5D340}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B03ACFA8-336A-4F88-BB0D-54A3CCA5D340}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19C42176-6F03-4886-AA7E-111E49FDAE19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19C42176-6F03-4886-AA7E-111E49FDAE19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19C42176-6F03-4886-AA7E-111E49FDAE19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19C42176-6F03-4886-AA7E-111E49FDAE19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,11 +7,12 @@ using System.Text.Json;
 
 namespace GlobalErrorHandlerIntegration.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1")]
     [ApiController]
     public class TelexGlobalErrorController : ControllerBase
     {
-        private static readonly ConcurrentDictionary<string, ErrorDetail> _errorStorage = new();
+        private readonly string _filePath = " GlobalErrorHandlerIntegration/TelexIntegration.json";
+
 
         private readonly ITelexErrorLogger _errorLogger;
 
@@ -25,6 +26,22 @@ namespace GlobalErrorHandlerIntegration.Controllers
         {
             throw new InvalidOperationException("This is a test exception to simulate an error.");
         }   
+        
+        
+        [HttpGet]
+        public IActionResult GetIntegrationConfig()
+        {
+            if (!System.IO.File.Exists(_filePath))
+            {
+                return NotFound("Integration configuration not found.");
+            }
+
+            var jsonContent = System.IO.File.ReadAllText(_filePath);
+            var integrationData = JsonSerializer.Deserialize<object>(jsonContent);
+
+            return Ok(integrationData);
+        }
+        
         
         [HttpPost("format-message")]
         public async Task<IActionResult> FormatErrorReport([FromBody] ErrorFormatPayload payload)
