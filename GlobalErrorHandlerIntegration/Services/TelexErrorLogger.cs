@@ -63,15 +63,17 @@ namespace GlobalErrorHandlerIntegration.Services
                     if (response.IsSuccessStatusCode)
                     {
                         string responseContent = await response.Content.ReadAsStringAsync();
-                        _logger.LogInformation($"Error report successfully sent to telex: {responseContent}");
+                        _logger.LogInformation($"Error log successfully sent to telex.\n" +
+                            $"Response: {responseContent}");
 
                         return;
                     }
-                    _logger.LogWarning("Attempt {Attempt}: trigger error log in telex. Status code: {StatusCode}", i + 1, response.StatusCode);
+                    _logger.LogWarning("Attempt {Attempt}: failed to send error log to telex.\n" +
+                        "Status code: {StatusCode}", i + 1, response.StatusCode);
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Attempt {Attempt}: Exception while sending error report.", i + 1);
+                    _logger.LogError(ex, "Attempt {Attempt}: An Exception while sending error report.", i + 1);
                 }
                 await Task.Delay(1000); // Wait 1 second before retrying
             }
@@ -99,7 +101,7 @@ namespace GlobalErrorHandlerIntegration.Services
             // Format the error message
             var fornattedError = FormatErrorReport(errorDetail, payload.Settings);
 
-           
+            _logger.Log(LogLevel.Information, "Successfully formatted error report....");           
 
             return fornattedError;           
             

@@ -29,7 +29,7 @@ namespace GlobalErrorHandlerIntegration.Middlewares
             catch (Exception ex)
             {
                 // Log the error Locally
-                _logger.LogError(ex, "An unhandled exception caught in middleware.");
+                _logger.LogError(ex, "An unhandled exception caught in Telex middleware.");
 
                 int status = DetermineStatusCode(ex);
 
@@ -71,7 +71,6 @@ namespace GlobalErrorHandlerIntegration.Middlewares
                     errorId = errorDetails.ErrorId
                 });
                 await context.Response.WriteAsync(response);
-
             }
         }
 
