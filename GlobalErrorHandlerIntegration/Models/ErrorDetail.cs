@@ -4,7 +4,6 @@
     {
         public string ErrorId { get; set; } = Guid.NewGuid().ToString();
         public DateTime Timestamp { get; set; }
-        public string Level { get; set; }
         public string ExceptionType { get; set; }
         public string Message { get; set; }
         public string StackTrace { get; set; }

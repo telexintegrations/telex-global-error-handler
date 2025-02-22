@@ -67,7 +67,8 @@ namespace GlobalErrorHandlerIntegration.Middlewares
 
                 var response = JsonConvert.SerializeObject(new
                 {
-                    error = "An internal server error occurred. Please try again later."
+                    error = "An error occurred. Please refer to your telex channel to view a detailed report of the error",
+                    errorId = errorDetails.ErrorId
                 });
                 await context.Response.WriteAsync(response);
 
@@ -80,10 +81,12 @@ namespace GlobalErrorHandlerIntegration.Middlewares
             // Map certain exception types to specifc status codes
             return exception switch
             {
-                ArgumentException _ => (int)HttpStatusCode.BadRequest,
+                ArgumentException or ArgumentNullException _ => (int)HttpStatusCode.BadRequest,
                 UnauthorizedAccessException _ => (int)HttpStatusCode.Unauthorized,
                 NotImplementedException _ => (int)HttpStatusCode.NotImplemented,
-                AuthenticationException _ => (int)HttpStatusCode.Forbidden,               
+                AuthenticationException _ => (int)HttpStatusCode.Forbidden,    
+                FileNotFoundException _ => (int)HttpStatusCode.NotFound,
+
                 _ => (int)HttpStatusCode.InternalServerError,
 
             };

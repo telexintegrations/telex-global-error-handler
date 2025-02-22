@@ -14,12 +14,6 @@
     "integration_category": "Monitoring & Logging",
     "integration_type": "modifier",
     "is_active": true,
-    "output": [
-      {
-        "label": "Telex Channel",
-        "value": true
-      }
-    ],
     "key_features": [
       "Captures unhandled exceptions using ASP.NET Core middleware.",
       "Formats errors with detailed information (exception type, message, stack trace, etc.).",
@@ -42,7 +36,7 @@
       {
         "label": "Max-Error Message-Length",
         "type": "number",
-        "description": "Maximum length for the stack trace error message sent to Telex.",
+        "description": "Maximum length for the stack trace error message sent to Telex. Leave it empty if you require full length or set it to 0",
         "default": 210,
         "required": true
       },
@@ -59,6 +53,6 @@
         "default": true
       }
     ],
-    "target_url": "https://yourdomain.com/api/target_url/format-message"
+    "target_url": "https://global-error-handler-latest.onrender.com/api/v1/telex-global-error-handler/format-message"
   }
 }

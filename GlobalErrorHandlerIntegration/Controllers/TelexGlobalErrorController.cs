@@ -1,18 +1,18 @@
-﻿using GlobalErrorHandlerIntegration.IServices;
+﻿using GlobalErrorHandlerIntegration.Helpers;
+using GlobalErrorHandlerIntegration.IServices;
 using GlobalErrorHandlerIntegration.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Collections.Concurrent;
 using System.Text.Json;
 
 namespace GlobalErrorHandlerIntegration.Controllers
 {
-    [Route("api/v1")]
+    [Route("api/v1/telex-global-error-handler")]
     [ApiController]
     public class TelexGlobalErrorController : ControllerBase
     {
-        private readonly string _filePath = " GlobalErrorHandlerIntegration/TelexIntegration.json";
-
 
         private readonly ITelexErrorLogger _errorLogger;
 
@@ -28,18 +28,24 @@ namespace GlobalErrorHandlerIntegration.Controllers
         }   
         
         
-        [HttpGet]
+        [HttpGet("integration.json")]
         public IActionResult GetIntegrationConfig()
         {
-            if (!System.IO.File.Exists(_filePath))
+            try
+            {
+                var integrationJson = IntegrationJsonLoader.LoadTelexIntegration();
+
+                if (string.IsNullOrWhiteSpace(integrationJson))
+                {
+                    return NotFound("Integration configuration is empty.");
+                }
+
+                return Ok(integrationJson);
+            }
+            catch (FileNotFoundException)
             {
                 return NotFound("Integration configuration not found.");
             }
-
-            var jsonContent = System.IO.File.ReadAllText(_filePath);
-            var integrationData = JsonSerializer.Deserialize<object>(jsonContent);
-
-            return Ok(integrationData);
         }
         
         
@@ -49,13 +55,17 @@ namespace GlobalErrorHandlerIntegration.Controllers
             
             if (string.IsNullOrWhiteSpace(payload.Message) || !payload.Settings.Any())
             {
-                return BadRequest("Invalid error payload.");
+               throw new ArgumentException("Invalid error payload.");
             }
 
             // Process the error report in a seperate thread.
-            Task.Run(async () => _errorLogger.ProcessErrorFormattingRequest(payload));
+            var formattedJson = _errorLogger.ProcessErrorFormattingRequest(payload);
 
-            return StatusCode(202, "Accepted");
+            return Ok(new
+            {
+                message = formattedJson
+               
+            });
         }   
     }
 }

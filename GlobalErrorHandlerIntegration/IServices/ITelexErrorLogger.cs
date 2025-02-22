@@ -8,7 +8,7 @@ namespace GlobalErrorHandlerIntegration.IServices
         /// <summary>
         /// Processs the formatting of the error logs and sends them to the configurred telex webhook.
         /// </summary>
-        Task ProcessErrorFormattingRequest(ErrorFormatPayload payload);
+        string ProcessErrorFormattingRequest(ErrorFormatPayload payload);
 
         /// <summary>
         /// Sends the error initially to the configurred telex webhook.

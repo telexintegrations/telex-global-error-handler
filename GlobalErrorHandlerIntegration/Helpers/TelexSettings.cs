@@ -1,4 +1,4 @@
-﻿namespace GlobalErrorHandlerIntegration.Helper
+﻿namespace GlobalErrorHandlerIntegration.Helpers
 {
     public class TelexSettings
     {

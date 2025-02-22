@@ -1,4 +1,4 @@
-using GlobalErrorHandlerIntegration.Helper;
+using GlobalErrorHandlerIntegration.Helpers;
 using GlobalErrorHandlerIntegration.IServices;
 using GlobalErrorHandlerIntegration.Middlewares;
 using GlobalErrorHandlerIntegration.Services;
@@ -43,7 +43,7 @@ app.UseCors("TelexPolicy");
 // Insert Global Exception Middleware into the pipeline to catch errors early
 app.UseMiddleware<TelexGlobalExceptionMiddleware>();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
