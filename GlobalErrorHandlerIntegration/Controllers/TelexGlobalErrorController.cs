@@ -50,7 +50,7 @@ namespace GlobalErrorHandlerIntegration.Controllers
         
         
         [HttpPost("format-message")]
-        public async Task<IActionResult> FormatErrorReport([FromBody] ErrorFormatPayload payload)
+        public async Task<IActionResult> FormatErrorMessage([FromBody] ErrorFormatPayload payload)
         {
             
             if (string.IsNullOrWhiteSpace(payload.Message) || !payload.Settings.Any())

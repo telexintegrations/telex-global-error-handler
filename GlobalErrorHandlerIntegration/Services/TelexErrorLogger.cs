@@ -107,7 +107,7 @@ namespace GlobalErrorHandlerIntegration.Services
             
         }
 
-        private string FormatErrorReport(ErrorDetail error, List<Setting> settings)
+        public string FormatErrorReport(ErrorDetail error, List<Setting> settings)
         {
             _logger.LogInformation("Formatting error message...");
 

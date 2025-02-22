@@ -78,14 +78,50 @@ namespace GlobalErrorHandlerIntegration.Tests.Controllers
         }
 
         [Fact]
-        public async Task FormatErrorReport_InvalidPayload_ReturnsBadRequest()
+        public async Task FormatErrorMessage_ValidPayload_ReturnsFormattedMessage()
         {
-            var payload = new ErrorFormatPayload { Message = "", Settings = new List<Setting>() };
+            // Arrange
+            var payload = new ErrorFormatPayload
+            {
+                Message = "{\"ErrorId\": \"12345\", \"Message\": \"Test error\"}",
+                Settings = new List<Setting>
+            {
+                new Setting { Label = "Include StackTrace", Type = "checkbox", Default = "true" }
+            }
+            };
 
-            var result = await _controller.FormatErrorReport(payload);
+            _mockLogger
+                .Setup(x => x.ProcessErrorFormattingRequest(payload))
+                .Returns("Formatted error message");
 
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-            Assert.Equal("Invalid error payload.", badRequestResult.Value);
+            // Act
+            var result = await _controller.FormatErrorMessage(payload) as OkObjectResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(200, result.StatusCode);
+
+            var response = result.Value as dynamic;
+            Assert.Equal("Formatted error message", response.message);
+
+            _mockLogger.Verify(x => x.ProcessErrorFormattingRequest(payload), Times.Once);
+        }
+
+        [Fact]
+        public async Task FormatErrorMessage_InvalidPayload_ThrowsArgumentException()
+        {
+            // Arrange
+            var payload = new ErrorFormatPayload
+            {
+                Message = "", // Empty message
+                Settings = new List<Setting>() // No settings
+            };
+
+            // Act & Assert
+            var ex = await Assert.ThrowsAsync<ArgumentException>(() => _controller.FormatErrorMessage(payload));
+            Assert.Equal("Invalid error payload.", ex.Message);
+
+            _mockLogger.Verify(x => x.ProcessErrorFormattingRequest(It.IsAny<ErrorFormatPayload>()), Times.Never);
         }
     }
 }
