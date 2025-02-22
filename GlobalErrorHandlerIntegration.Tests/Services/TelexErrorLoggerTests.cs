@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using GlobalErrorHandlerIntegration.Helper;
+using GlobalErrorHandlerIntegration.Helpers;
 using GlobalErrorHandlerIntegration.Models;
 using GlobalErrorHandlerIntegration.Services;
 using Microsoft.Extensions.Logging;
