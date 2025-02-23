@@ -112,6 +112,11 @@ Add the following settings to your `appsettings.json` file:
 Modify `Program.cs` (for .NET 6+ projects) to include the middleware:
 
 ```csharp
+using GlobalErrorHandlerIntegration.Middlewares // import the Middleware
+using GlobalErrorHandlerIntegration.IServices  // import the IServices
+using GlobalErrorHandlerIntegration.Services  // import the Services
+using GlobalErrorHandlerIntegration.Helpers  // import the Helper
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure Telex webhook url
