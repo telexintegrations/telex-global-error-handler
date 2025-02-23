@@ -37,7 +37,7 @@ Make a GET request to trigger an error and verify that it is logged correctly.
 
 ```
 /telex-global-error-handler
-│── TelexErrorHandling/              # Main project folder 
+│── GlobalErrorHandlerIntegration/              # Main project folder 
 |   ├── Helpers/ 
 |   |   ├── TelexSettings.cs              # Contains an auto implemented property for the webhook url configuration.
 |   |   |
@@ -57,7 +57,7 @@ Make a GET request to trigger an error and verify that it is logged correctly.
 │   │   |
 │   ├── appsettings.json               # Application settings (Webhook, logging config, etc.)  
 │   ├── Program.cs                     # Entry point for the application  
-│   ├── TelexGlobalErrorHandler.csproj  # Project file  
+│   ├── GlobalErrorHandlerIntegration.csproj  # Project file  
 │                              
 │── README.md                          # Documentation  
 │── .gitignore                         # Git ignore file  
@@ -87,7 +87,7 @@ Modify your application's `.csproj` file to include a reference to the Telex Glo
 
 ```xml
 <ItemGroup>
-  <ProjectReference Include="path\to\telex-global-error-handler\TelexGlobalErrorHandler.csproj" />
+  <ProjectReference Include="path\to\telex-global-error-handler\GlobalErrorHandlerIntegration.csproj" />
 </ItemGroup>
 ```
 
@@ -137,7 +137,7 @@ app.Run();
 ---
 
 It is important to note that you are not to interact directly with any of these classes and methods as they are already implemented and integrated into the middleware.
-Your job is to ensure that you have added a reference to `TelexGlobalErrorHandler` in your application project to use its services.
+Your job is to ensure that you have added a reference to `GlobalErrorHandlerIntegration` in your application project to use its services.
 Then configure the middleware in the request pipeline (program.cs) of your application as shown in the previous steps, and watch the Error handler do its work.
 
 ---
