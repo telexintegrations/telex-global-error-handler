@@ -21,9 +21,13 @@ builder.Services.Configure<TelexSettings>(builder.Configuration.GetSection("Tele
 // Allow Cors from Telex
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("TelexPolicy", builder =>
+    options.AddPolicy("TelexPolicy", policy =>
     {
-        builder.WithOrigins("https://telex.im") 
+        policy.WithOrigins(
+            "https://telex.im", 
+            "http://staging.telextest.im",
+            "http://telextest.im",
+            "https://staging.telex.im") 
                .AllowAnyHeader()
                .AllowAnyMethod();
     });

@@ -15,8 +15,8 @@ To begin using the global error-handling integration, follow these steps to conf
 3. Use the deployed url of the integration json file below to add the integration to your organization.
 `https://global-error-handler-latest.onrender.com/api/v1/telex-global-error-handler/integration.json`
 
-4. Locate **Global Error Handler** and click **Activate**.
-5. Provide the necessary configuration values:
+4. Locate **Global Error Handler** and **Activate** for your channel.
+5. Provide the necessary configuration settings:
    - **Include InnerException:** `true`
    - **Include Stack Trace:** `true`
    - **Max-Length for Stack Trace:** `200` or **Leave it empty** for full length.
@@ -80,7 +80,7 @@ git clone https://github.com/telexintegrations/telex-global-error-handler.git
 1. Navigate to your ASP.NET Core solution.
 2. Open the `Solution Explorer` in Visual Studio.
 3. Right-click on your solution and select **Add > Existing Project**.
-4. Locate the `TelexGlobalErrorHandler.csproj` file inside the cloned repository and add it to your solution.
+4. Once successful, locate the `TelexGlobalErrorHandler.csproj` file inside the cloned repository and add it to your solution.
 
 ### **Step 4: Reference the Project in Your Application**
 Modify your application's `.csproj` file to include a reference to the Telex Global Error Handling project:
