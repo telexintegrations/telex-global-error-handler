@@ -113,10 +113,10 @@ Once your integration is active and your NuGet package is installed, test the se
 
 Here is a screenshot of the integration working in a channel
 
-### Screenshot 1
+### Screenshot 1 (The raw error message which has not been formatted)
 ![Integration Test Screenshot 1](https://res.cloudinary.com/dlu45noef/image/upload/v1740324613/Screenshot_2025-02-22_164649_pyeekg.png)
 
-### Screenshot 2
+### Screenshot 2 (The formatted error message)
 ![Integration Test Screenshot 2](https://res.cloudinary.com/dlu45noef/image/upload/v1740324612/Screenshot_2025-02-22_164750_aq0kte.png)
 
 Ensure that the output matches the expected results as seen in the screenshots.
