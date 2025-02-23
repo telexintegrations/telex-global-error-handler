@@ -103,7 +103,7 @@ Add the following settings to your `appsettings.json` file:
 ```json
 {
   "TelexSettings": {
-    "TelexWebhook": "https://your-telex-webhook-url.com"
+    "WebhookUrl": "https://your-telex-webhook-url.com"
   }
 }
 ```
