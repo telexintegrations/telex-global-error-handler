@@ -101,6 +101,12 @@ namespace GlobalErrorHandlerIntegration.Services
             // Format the error message
             var fornattedError = FormatErrorReport(errorDetail, payload.Settings);
 
+            if (string.IsNullOrWhiteSpace(fornattedError))
+            {
+                _logger.Log(LogLevel.Information, "Failed to format error report....");
+                throw new Exception("Error formatting failed.");    
+            }
+
             _logger.Log(LogLevel.Information, "Successfully formatted error report....");           
 
             return fornattedError;           
@@ -131,17 +137,19 @@ namespace GlobalErrorHandlerIntegration.Services
 
             // Build a readable message report.
             var sb = new StringBuilder();
-            sb.AppendLine($"Error Id = {error.ErrorId}\n");
-            sb.AppendLine($"Error Timestamp: {error.Timestamp}\n");
-            sb.AppendLine($"Exception: {error.ExceptionType}\n");
-            sb.AppendLine($"Message: {error.Message}\n");
+            sb.AppendLine($"🆔 Error Id = {error.ErrorId}\n");
+            sb.AppendLine($"⏳ Error Timestamp: {error.Timestamp}\n");
+            sb.AppendLine($"⚠️ Exception: {error.ExceptionType}\n");
+            sb.AppendLine($"💬 Message: {error.Message}\n");
+
+            // Include a innerException if included in settings
             if (includeInnerException && !string.IsNullOrEmpty(error.InnerExceptionMessage))
             {
-                sb.AppendLine($"⚠️ Inner Exception: {error.InnerExceptionMessage}\n");
+                sb.AppendLine($"🚨 Inner Exception: {error.InnerExceptionMessage}\n");
             }
-            sb.AppendLine($"HTTP Method: {error.HttpMethod} ||  URL: {error.Url}  ||  Status Code: {error.StatusCode.ToString()}\n");           
+            sb.AppendLine($"🌐 HTTP Method: {error.HttpMethod} || 🔗 URL: {error.Url}  || 🛑 Status Code: {error.StatusCode.ToString()}\n");           
 
-            // Optionally include a truncated stack trace for readability.
+            // Include stack trace and truncate if included in settings
             if (includeStackTrace && !string.IsNullOrEmpty(error.StackTrace))
             {
                 var stackLength = maxStackTraceLength > 0 && error.StackTrace.Length > maxStackTraceLength 
