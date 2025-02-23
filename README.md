@@ -114,10 +114,13 @@ Modify `Program.cs` (for .NET 6+ projects) to include the middleware:
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure Telex webhook url
+builder.Services.Configure<TelexSettings>(builder.Configuration.GetSection("TelexSettings"));
+
 // Register Telex error logging services
 builder.Services.AddSingleton<ITelexErrorLogger, TelexErrorLogger>();
 // Register Telex Logger Service http client
-builder.Services.AddHttpClient<ITelexErrorLogger, TelexErrorLogger>();
+builder.Services.AddHttpClient<ITelexErrorLogger, TelexErrorLogger>(); 
 
 var app = builder.Build();
 
