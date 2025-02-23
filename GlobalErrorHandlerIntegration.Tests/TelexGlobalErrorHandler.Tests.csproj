@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GlobalErrorHandlerIntegration\GlobalErrorHandlerIntegration.csproj" />
+    <ProjectReference Include="..\GlobalErrorHandlerIntegration\TelexGlobalErrorHandler.csproj" />
   </ItemGroup>
 
   <ItemGroup>

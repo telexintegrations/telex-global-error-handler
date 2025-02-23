@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalErrorHandlerIntegration", "GlobalErrorHandlerIntegration\GlobalErrorHandlerIntegration.csproj", "{B03ACFA8-336A-4F88-BB0D-54A3CCA5D340}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelexGlobalErrorHandler", "GlobalErrorHandlerIntegration\TelexGlobalErrorHandler.csproj", "{B03ACFA8-336A-4F88-BB0D-54A3CCA5D340}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6E3B34B1-FC71-44F3-B1C4-14D82AE4E1FE}"
 	ProjectSection(SolutionItems) = preProject
@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalErrorHandlerIntegration.Tests", "GlobalErrorHandlerIntegration.Tests\GlobalErrorHandlerIntegration.Tests.csproj", "{19C42176-6F03-4886-AA7E-111E49FDAE19}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelexGlobalErrorHandler.Tests", "GlobalErrorHandlerIntegration.Tests\TelexGlobalErrorHandler.Tests.csproj", "{19C42176-6F03-4886-AA7E-111E49FDAE19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

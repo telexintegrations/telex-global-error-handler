@@ -176,7 +176,7 @@ namespace GlobalErrorHandlerIntegration.Tests.Services
             var errorDetail = new ErrorDetail
             {
                 ErrorId = "123",
-                Message = "Test error"
+                Message = "Test error",
                 Timestamp = DateTime.UtcNow,
                 ExceptionType = "InvalidOperationException",
                 StatusCode = 500
