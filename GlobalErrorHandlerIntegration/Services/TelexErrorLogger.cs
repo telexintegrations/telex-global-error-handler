@@ -13,10 +13,6 @@ namespace GlobalErrorHandlerIntegration.Services
     public class TelexErrorLogger : ITelexErrorLogger
     {
 
-        // Thread-safe queue to store error logs (as JSON strings)
-        private readonly ConcurrentQueue<string> _errorQueue = new ConcurrentQueue<string>();
-        private static readonly ConcurrentDictionary<string, ErrorDetail> _errorStorage = new();
-
         private readonly HttpClient _httpClient;
         private readonly ILogger<TelexErrorLogger> _logger;
         private readonly string _telexWebhookUrl;
