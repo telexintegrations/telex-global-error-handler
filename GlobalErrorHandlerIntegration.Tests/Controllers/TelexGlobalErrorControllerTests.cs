@@ -85,9 +85,9 @@ namespace GlobalErrorHandlerIntegration.Tests.Controllers
             {
                 Message = "{\"ErrorId\": \"12345\", \"Message\": \"Test error\"}",
                 Settings = new List<Setting>
-            {
-                new Setting { Label = "Include StackTrace", Type = "checkbox", Default = "true" }
-            }
+                {
+                    new Setting { Label = "Include StackTrace", Type = "checkbox", Default = "true" }
+                }
             };
 
             _mockLogger

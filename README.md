@@ -1,4 +1,4 @@
-# Telex Global Error Handling Integration
+﻿# Telex Global Error Handling Integration
 
 ## Overview
 This integration provides a **global error-handling mechanism** for applications using the **Telex platform**. It ensures that errors are captured, formatted, and logged in your telex channel in a structured way, improving observability and debugging. To use this integration, you need to **activate it in your Telex organization** and also **install the corresponding NuGet package in your application**.
@@ -114,10 +114,10 @@ Once your integration is active and your NuGet package is installed, test the se
 Here is a screenshot of the integration working in a channel
 
 ### Screenshot 1
-![Integration Test Screenshot 1](./mnt/data/Screenshot%202025-02-22%20164649.png)
+![Integration Test Screenshot 1](https://res.cloudinary.com/dlu45noef/image/upload/v1740324613/Screenshot_2025-02-22_164649_pyeekg.png)
 
 ### Screenshot 2
-![Integration Test Screenshot 2](./mnt/data/Screenshot%202025-02-22%20164750.png)
+![Integration Test Screenshot 2](https://res.cloudinary.com/dlu45noef/image/upload/v1740324612/Screenshot_2025-02-22_164750_aq0kte.png)
 
 Ensure that the output matches the expected results as seen in the screenshots.
 
@@ -125,7 +125,7 @@ Ensure that the output matches the expected results as seen in the screenshots.
 
 ## **5. Deployment**  
 The integration is accessible at:  
-?? **`https://global-error-handler-latest.onrender.com`**  
+👉 **`https://global-error-handler-latest.onrender.com`**  
 
 The integration is hosted on **Render** using a **Docker image**. To ensure it works as expected, an endpoint is provided to simulate errors and verify the logging process.  
 
@@ -144,5 +144,5 @@ To use the integration in your own code, the **NuGet package** should be include
 
 ---
 
-By following these steps, you can seamlessly integrate Telex�s global error-handling capabilities into your application. ??
+By following these steps, you can seamlessly integrate Telex’s global error-handling capabilities into your application. 🚀
 

@@ -58,11 +58,11 @@ namespace GlobalErrorHandlerIntegration.Tests.Services
                     InnerExceptionMessage = "Inner exception occurred."
                 }),
                 Settings = new List<Setting>
-            {
-                new Setting { Label = "Include StackTrace", Type = "checkbox", Default = "true" },
-                new Setting { Label = "Include InnerException", Type = "checkbox", Default = "true" },
-                new Setting { Label = "Max-Error Message-Length", Type = "number", Default = "100" }
-            }
+                {
+                    new Setting { Label = "Include StackTrace", Type = "checkbox", Default = "true" },
+                    new Setting { Label = "Include InnerException", Type = "checkbox", Default = "true" },
+                    new Setting { Label = "Max-Error Message-Length", Type = "number", Default = "100" }
+                }
             };
 
             // Act
@@ -177,6 +177,9 @@ namespace GlobalErrorHandlerIntegration.Tests.Services
             {
                 ErrorId = "123",
                 Message = "Test error"
+                Timestamp = DateTime.UtcNow,
+                ExceptionType = "InvalidOperationException",
+                StatusCode = 500
             };
 
             var expectedResponse = new HttpResponseMessage(HttpStatusCode.OK)
