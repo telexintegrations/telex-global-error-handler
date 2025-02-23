@@ -116,12 +116,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Register Telex error logging services
 builder.Services.AddSingleton<ITelexErrorLogger, TelexErrorLogger>();
+// Register Telex Logger Service http client
 builder.Services.AddHttpClient<ITelexErrorLogger, TelexErrorLogger>();
 
 var app = builder.Build();
 
-// Add global error handling middleware
-app.UseMiddleware<GlobalErrorHandlingMiddleware>();
+// Add Telex global error handling middleware
+app.UseMiddleware<TelexGlobalExceptionMiddleware>();
 
 app.Run();
 ```
