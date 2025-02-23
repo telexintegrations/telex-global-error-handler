@@ -14,12 +14,14 @@ To begin using the global error-handling integration, follow these steps to conf
 2. Go to the **Integrations** section.
 3. Locate **Global Error Handler** and click **Activate**.
 4. Provide the necessary configuration values:
-   - **Log Level:** `Error`
-   - **Enable Stack Trace:** `true`
+   - **Include InnerException:** `true`
+   - **Include Stack Trace:** `true`
+   - **Max-Length for Stack Trace** `200` or `0` for the full length.
+   - **To get the full Stack Trace length, input `0` or leave it empty.
 5. Save your settings.
 
 ### **Step 2: Define the Integration JSON**
-Here is the deployed url for the integration json `https://global-error-handler-latest.onrender.com/api/telex-global-error-handler/simulate-error`
+Here is the deployed url for the integration json `https://global-error-handler-latest.onrender.com/api/v1/telex-global-error-handler/simulate-error`
 
 Make a Get request to the deployed json integration to get the integrated json object.
 
@@ -42,7 +44,7 @@ Add the following settings to your `appsettings.json` file:
 ```json
 {
   "TelexSettings": {
-    "TelexWebhook": "https://your-telex-webhook-endpoint.com"
+    "TelexWebhook": "https://your-telex-webhook-url.com"
   }
 }
 ```
@@ -124,18 +126,18 @@ Ensure that the output matches the expected results as seen in the screenshots.
 ---
 
 ## **5. Deployment**  
-The integration is accessible at:  
-👉 **`https://global-error-handler-latest.onrender.com`**  
+The integration is hosted on **Render** using a **Docker image**. To ensure it works as expected, an endpoint is provided to simulate errors and verify the logging process.
 
-The integration is hosted on **Render** using a **Docker image**. To ensure it works as expected, an endpoint is provided to simulate errors and verify the logging process.  
+# Base Url  
+👉 **`https://global-error-handler-latest.onrender.com/api/v1`**  
 
 ### **Testing the Deployment**  
 To test if the integration successfully catches and logs errors, you can make a get request to the error simulation endpoint:  
 ```sh
-GET https://global-error-handler-latest.onrender.com/api/telex-global-error-handler/simulate-error
+GET https://global-error-handler-latest.onrender.com/api/v1/telex-global-error-handler/simulate-error
 
 ```sh
-curl -X GET  https://global-error-handler-latest.onrender.com/api/telex-global-error-handler/simulate-error
+curl -X GET  https://global-error-handler-latest.onrender.com/api/v1/telex-global-error-handler/simulate-error
 ```
 This should trigger an error and log it in your Telex channel.
 
