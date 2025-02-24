@@ -87,11 +87,15 @@ namespace GlobalErrorHandlerIntegration.Services
                 );
 
                 if (errorDetail == null)
-                    throw new Exception("Deserialized error message is null.");
+                {
+                    _logger.LogError("Deserialized error message is null.");
+                    return null;
+                }
             }
-            catch (JsonException)
+            catch (JsonException ex)
             {
-                throw new Exception("Malformed JSON in message payload.");
+                _logger.LogError($"Malformed JSON in message payload sent for formatting. {ex}");
+                return null;
             }
 
             // Format the error message
@@ -100,7 +104,7 @@ namespace GlobalErrorHandlerIntegration.Services
             if (string.IsNullOrWhiteSpace(fornattedError))
             {
                 _logger.Log(LogLevel.Information, "Failed to format error report....");
-                throw new Exception("Error formatting failed.");    
+                return null;    
             }
 
             _logger.Log(LogLevel.Information, "Successfully formatted error report....");           

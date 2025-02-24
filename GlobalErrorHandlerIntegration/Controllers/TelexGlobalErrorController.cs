@@ -15,10 +15,12 @@ namespace GlobalErrorHandlerIntegration.Controllers
     {
 
         private readonly ITelexErrorLogger _errorLogger;
+        private readonly ILogger<TelexGlobalErrorController> _logger;
 
-        public TelexGlobalErrorController(ITelexErrorLogger errorLogger)
+        public TelexGlobalErrorController(ITelexErrorLogger errorLogger, ILogger<TelexGlobalErrorController> logger)
         {
             _errorLogger = errorLogger;
+            _logger = logger;
         }
 
         [HttpGet("simulate-error")]
@@ -55,11 +57,18 @@ namespace GlobalErrorHandlerIntegration.Controllers
             
             if (string.IsNullOrWhiteSpace(payload.Message) || !payload.Settings.Any())
             {
-               throw new ArgumentException("Invalid error payload.");
+               _logger.LogInformation("Invalid error payload: Message payload or settings cannot be empty");
+                return BadRequest();
             }
 
             // Process the error report in a seperate thread.
             var formattedJson = _errorLogger.ProcessErrorFormattingRequest(payload);
+
+            if (string.IsNullOrEmpty(formattedJson))
+            {
+                _logger.LogInformation("Failed to format error message");
+                return BadRequest();
+            }
 
             return Ok(new
             {
