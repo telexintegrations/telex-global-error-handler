@@ -54,7 +54,7 @@ namespace GlobalErrorHandlerIntegration.Services
             {
                 try
                 {
-                    using var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+                    using var content = new StringContent(jsonPayload, new UTF8Encoding(false), "application/json");
                     var response = await _httpClient.PostAsync(_telexWebhookUrl, content);
                     if (response.IsSuccessStatusCode)
                     {
@@ -78,26 +78,15 @@ namespace GlobalErrorHandlerIntegration.Services
         public string ProcessErrorFormattingRequest(ErrorFormatPayload payload)
         {
            // Deserialize error message payload back into ErrorDetail to format it.
-            ErrorDetail? errorDetail;
-            try
-            {
-                errorDetail = JsonSerializer.Deserialize<ErrorDetail>(
-                    payload.Message,
-                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
-                );
+            
+            var errorDetail = ExtractErrorDetails(payload.Message);
 
-                if (errorDetail == null)
-                {
-                    _logger.LogError("Deserialized error message is null.");
-                    return null;
-                }
-            }
-            catch (JsonException ex)
+            if (errorDetail == null)
             {
-                _logger.LogError($"Malformed JSON in message payload sent for formatting. {ex}");
+                _logger.LogInformation("Failed to deserialized error message.");
                 return null;
             }
-
+            
             // Format the error message
             var fornattedError = FormatErrorReport(errorDetail, payload.Settings);
 
@@ -159,5 +148,34 @@ namespace GlobalErrorHandlerIntegration.Services
             }
             return sb.ToString();
         }
+
+
+public ErrorDetail? ExtractErrorDetails(string json)
+    {
+        try
+        {
+            using JsonDocument doc = JsonDocument.Parse(json);
+            var root = doc.RootElement;
+
+            return new ErrorDetail
+            {
+                ErrorId = root.GetProperty("ErrorId").GetString() ?? Guid.NewGuid().ToString(),
+                Timestamp = root.GetProperty("Timestamp").GetDateTime(),
+                ExceptionType = root.GetProperty("ExceptionType").GetString(),
+                Message = root.GetProperty("Message").GetString(),
+                StackTrace = root.GetProperty("StackTrace").GetString(),
+                HttpMethod = root.GetProperty("HttpMethod").GetString(),
+                Url = root.GetProperty("Url").GetString(),
+                StatusCode = root.GetProperty("StatusCode").GetInt32(),
+                InnerExceptionMessage = root.GetProperty("InnerExceptionMessage").GetString()
+            };
+        }
+        catch (JsonException ex)
+        {
+            _logger.LogInformation($"Malformed JSON in message payload: {ex.Message}");
+            return null;
+        }
     }
+
+}
 }

@@ -54,14 +54,16 @@ namespace GlobalErrorHandlerIntegration.Controllers
         [HttpPost("format-message")]
         public async Task<IActionResult> FormatErrorMessage([FromBody] ErrorFormatPayload payload)
         {
-            
+            _logger.LogInformation($"Received error payload for formatting");
+
             if (string.IsNullOrWhiteSpace(payload.Message) || !payload.Settings.Any())
             {
                _logger.LogInformation("Invalid error payload: Message payload or settings cannot be empty");
                 return BadRequest();
             }
 
-            // Process the error report in a seperate thread.
+            _logger.LogInformation($"Proceeding to format error message {payload.Message}");
+            // Process the error report.
             var formattedJson = _errorLogger.ProcessErrorFormattingRequest(payload);
 
             if (string.IsNullOrEmpty(formattedJson))
